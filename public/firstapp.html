@@ -9,27 +9,37 @@
 </head>
 
 <body>
-    <div id="div1" v-html="template">
-        {{msg}}
-        {{countNum}}<br>
-        <a :href="url">百度</a>
-        <button @click="count()">click</button>
+    <div id="div1">
+        {{msg}}<br>
+        <div v-if="count== 0">
+            {{count}}==0
+        </div>
+        <div v-else-if="count < 5" :class="['active','a2', {'anothor': count > 3}]" :style="styleMsg">
+            {{count}} &lt; 5
+        </div>
+        <div v-else>
+            {{count}} > 5
+        </div>
+        <div v-show="count==0">
+            {{count}}
+        </div>
+        <br>
+        <div v-for="item in list">
+            {{item}}<br>
+        </div>
     </div>
-
 </body>
 <script>
-    new Vue({
+    var app = new Vue({
         el: '#div1',
         data: {
-            url: 'http://baidu.com',
-            msg: 'hello vue <br>',
-            countNum: 0
-        },
-        methods: {
-            count: function () {
-                this.countNum++
+            msg: 'hello vue',
+            count: 1,
+            list: [1, 2, 3, 4, 5],
+            styleMsg: {
+                color: 'red'
             }
-        }
+        },
     })
 </script>
 
