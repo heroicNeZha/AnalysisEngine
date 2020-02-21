@@ -1,32 +1,37 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <transition name="el-fade-in-linear">
+      <div v-show="show" class="transition-box">
+        <router-view />
+      </div>
+    </transition>
   </div>
 </template>
-
+<script>
+export default {
+  data: function() {
+    return {
+      show: true
+    };
+  }
+};
+</script>
 <style lang="scss">
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
 #app {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  height: 100%;
   color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 </style>
