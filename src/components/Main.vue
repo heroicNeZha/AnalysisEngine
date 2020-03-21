@@ -7,8 +7,29 @@
           <div class="nav-title">物联网组网智能分析引擎</div>
         </a>
       </el-col>
-      <el-col :span="4"></el-col>
-      <el-col :span="10" class="userinfo">
+      <el-col :span="10">
+        <el-menu
+          default-active="this.$router.path"
+          router
+          class="el-menu-demo"
+          mode="horizontal"
+          background-color="#545c64"
+          text-color="#fff"
+          active-text-color="#ffd04b"
+        >
+          <el-submenu :index="navItem.name" v-for="(navItem,i) in navList" :key="i">
+            <template slot="title">
+              <i :class="navItem.icon"></i>
+              <span>{{navItem.name}}</span>
+            </template>
+            <el-menu-item v-for="(item,j) in navItem.navGroup" :key="j" :index="item.path">
+              <i :class="item.icon"></i>
+              <span slot="title">{{item.name}}</span>
+            </el-menu-item>
+          </el-submenu>
+        </el-menu>
+      </el-col>
+      <el-col :span="4" class="userinfo">
         <el-dropdown>
           <span class="el-dropdown-link userinfo-inner">
             你好：管理员
@@ -16,7 +37,7 @@
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>
-              <a >首页</a>
+              <a>首页</a>
             </el-dropdown-item>
             <el-dropdown-item>
               <a @click="handleSelect">修改密码</a>
@@ -26,28 +47,8 @@
         </el-dropdown>
       </el-col>
     </el-col>
-    <el-col :span="24">
-      <el-col :span="6">
-        <el-menu
-          default-active="this.$router.path"
-          router
-          class="el-menu-vertical-demo"
-          @click="handleSelect"
-          background-color="#545c64"
-          text-color="#fff"
-          active-text-color="#ffd04b"
-        >
-          <el-menu-item v-for="(item,i) in navList" :key="i" :index="item.name">
-            <i class="el-icon-search"></i>
-            <span slot="title">{{item.navItem}}</span>
-          </el-menu-item>
-        </el-menu>
-      </el-col>
-      <el-col :span="18">
-        <div class="center">
-          <router-view />
-        </div>
-      </el-col>
+    <el-col :span="24" class="mainpage">
+      <router-view />
     </el-col>
   </el-row>
 </template>
@@ -74,15 +75,12 @@
   }
 }
 
-.center {
-  text-align: center;
-}
-
 .container {
   position: absolute;
   top: 0;
   bottom: 0;
   width: 100%;
+  height: 100%;
   .header {
     height: 60px;
     line-height: 60px;
@@ -139,16 +137,66 @@
       color: #ffffff;
     }
   }
+  .mainpage {
+    .center {
+      text-align: center;
+      height: 500px;
+    }
+  }
 }
 </style>
 
 <script>
 export default {
+  name: "Main",
   data: function() {
     return {
       navList: [
-        { name: "/", navItem: "Home" },
-        { name: "/about", navItem: "About" }
+        {
+          name: "方案中心",
+          icon: "el-icon-s-opportunity",
+          navGroup: [
+            {
+              path: "/scheme/search",
+              name: "方案查询",
+              icon: "el-icon-search"
+            },
+            {
+              path: "/scheme/manage",
+              name: "方案添加",
+              icon: "el-icon-plus"
+            },
+            {
+              path: "/scheme/manage",
+              name: "方案管理",
+              icon: "el-icon-s-tools"
+            }
+          ]
+        },
+        {
+          name: "项目中心",
+          icon: "el-icon-s-cooperation",
+          navGroup: [
+            { path: "/program/add", name: "发布项目", icon: "el-icon-plus" },
+            {
+              path: "/program/manage",
+              name: "项目管理",
+              icon: "el-icon-s-tools"
+            }
+          ]
+        },
+        {
+          name: "用户中心",
+          icon: "el-icon-user-solid",
+          navGroup: [
+            { path: "/user/manage", name: "用户管理", icon: "el-icon-s-tools" },
+            {
+              path: "/user/manage",
+              name: "信息中心",
+              icon: "el-icon-s-comment"
+            }
+          ]
+        }
       ]
     };
   },

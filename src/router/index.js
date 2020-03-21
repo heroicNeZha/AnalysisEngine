@@ -1,26 +1,33 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
-import Main from '../components/Main.vue';
+import App from '../App.vue'
+// import Main from '../components/Main.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'Main',
-    component: Main,
+    name: 'business',
+    component: App,
+    children: [
+      {
+        path: '/home',
+        name: '首页',
+        component: Home,
+      }, {
+        path: '/scheme/manage',
+        name: '方案管理',
+        component: Home,
+      },{
+        path: '/user/manage',
+        name: '用户管理',
+        component: () => import('../views/user/manage')
+      }
+    ]
   },
-  {
-    path: '/home',
-    name: '首页',
-    component: Home,
-  },
-  {
-    path: '/about',
-    name: '关于',
-    component: () => import('../views/About.vue'),
-  },
+
 ];
 
 const router = new VueRouter({

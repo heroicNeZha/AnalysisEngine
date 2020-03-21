@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Main />
     <transition name="el-fade-in-linear">
       <div v-show="show" class="transition-box">
         <router-view />
@@ -8,11 +9,15 @@
   </div>
 </template>
 <script>
+import Main from '@/components/Main.vue';
 export default {
   data: function() {
     return {
       show: true
     };
+  },
+  components:{
+    Main,
   }
 };
 </script>
@@ -33,5 +38,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
   color: #2c3e50;
+  .transition-box {
+    height: 100%;
+  }
 }
 </style>
