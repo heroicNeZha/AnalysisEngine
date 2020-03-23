@@ -48,7 +48,13 @@
       </el-col>
     </el-col>
     <el-col :span="24" class="mainpage">
-      <router-view />
+      <el-col :span="4" class="fade"></el-col>
+      <el-col :span="16">
+         <transition name="el-fade-in-linear">
+           <router-view />
+      </transition>
+      </el-col>
+      <el-col :span="4" class="fade"></el-col>
     </el-col>
   </el-row>
 </template>
@@ -138,9 +144,8 @@
     }
   }
   .mainpage {
-    .center {
-      text-align: center;
-      height: 500px;
+    .fade {
+      height: 200px;
     }
   }
 }

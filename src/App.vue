@@ -1,11 +1,6 @@
 <template>
   <div id="app">
     <Main />
-    <transition name="el-fade-in-linear">
-      <div v-show="show" class="transition-box">
-        <router-view />
-      </div>
-    </transition>
   </div>
 </template>
 <script>
