@@ -8,6 +8,11 @@ Vue.use(VueRouter);
 
 const routes = [
   {
+    path: '/login',
+    name: '登录',
+    component: () => import('../views/user/login')
+  },
+  {
     path: '/scheme/manage',
     name: '方案管理',
     component: Home,

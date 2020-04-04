@@ -1,18 +1,25 @@
 <template>
   <div id="app">
-    <Main />
+    <div v-if="this.$store.state.token==0">
+      <Login />
+    </div>
+    <div v-else>
+      <Main />
+    </div>
   </div>
 </template>
 <script>
-import Main from '@/components/Main.vue';
+import Main from "@/components/Main.vue";
+import Login from "@/views/user/login.vue";
 export default {
   data: function() {
     return {
-      show: true
+      show: true,
     };
   },
-  components:{
+  components: {
     Main,
+    Login
   }
 };
 </script>

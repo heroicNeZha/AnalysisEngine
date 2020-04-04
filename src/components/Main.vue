@@ -30,19 +30,15 @@
         </el-menu>
       </el-col>
       <el-col :span="4" class="userinfo">
-        <el-dropdown>
+        <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link userinfo-inner">
             你好：管理员
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>
-              <a>首页</a>
-            </el-dropdown-item>
-            <el-dropdown-item>
-              <a @click="handleSelect">修改密码</a>
-            </el-dropdown-item>
-            <el-dropdown-item @click="handleSelect">注销登录</el-dropdown-item>
+          <el-dropdown-menu slot="dropdown" >
+            <el-dropdown-item>首页</el-dropdown-item>
+            <el-dropdown-item>修改密码</el-dropdown-item>
+            <el-dropdown-item command="logout">注销登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-col>
@@ -50,9 +46,9 @@
     <el-col :span="24" class="mainpage">
       <el-col :span="4" class="fade"></el-col>
       <el-col :span="16">
-         <transition name="el-fade-in-linear">
-           <router-view />
-      </transition>
+        <transition name="el-fade-in-linear">
+          <router-view />
+        </transition>
       </el-col>
       <el-col :span="4" class="fade"></el-col>
     </el-col>
@@ -208,6 +204,11 @@ export default {
   methods: {
     handleSelect(key, keyPath) {
       alert(key, keyPath);
+    },
+    handleCommand(command) {
+      if (command == "logout") {
+        this.$store.commit("setToken", 0);
+      }
     }
   }
 };
