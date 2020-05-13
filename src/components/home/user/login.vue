@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <div class="title">
-      <img src="../../assets/logo.png" class="title-login" />
+      <img src="../../../assets/logo.png" class="title-login" />
       <div class="title-text">物联网组网智能分析引擎</div>
     </div>
 
@@ -50,8 +50,19 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          alert("登录成功 ");
-          this.$store.commit('setToken',this.loginForm.email);
+          this.$axios
+            .post("/login", {
+              username: this.loginForm.email,
+              password: this.loginForm.password
+            })
+            .then(successResponse => {
+              // eslint-disable-next-line no-console
+              console.log(JSON.stringify(successResponse.data));
+              if (successResponse.data.code === 200) {
+                this.$router.replace({ path: "/scheme/manage" });
+              }
+            });
+          this.$store.commit("setToken", this.loginForm.email);
         } else {
           alert("登录失败");
           return false;

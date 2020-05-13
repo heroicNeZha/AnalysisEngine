@@ -10,7 +10,7 @@
 </template>
 <script>
 import Main from "@/components/Main.vue";
-import Login from "@/views/user/login.vue";
+import Login from "@/components/home/user/login.vue";
 export default {
   data: function() {
     return {
