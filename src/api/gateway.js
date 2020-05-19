@@ -7,3 +7,12 @@ export function getList(params) {
     params
   })
 }
+
+export function add(data) {
+  return request({
+    url: '/gateway/add',
+    method: 'post',
+    data
+  })
+}
+

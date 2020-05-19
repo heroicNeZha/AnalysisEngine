@@ -8,11 +8,11 @@ import sensor from './sensor'
 import solution from './solution'
 
 const mocks = [
-  ...user,
   ...table,
   ...gateway,
   ...sensor,
-  ...solution
+  ...solution,
+  ...user
 ]
 
 // for front mock

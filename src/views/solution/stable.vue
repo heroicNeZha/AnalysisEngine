@@ -9,10 +9,10 @@
       fit
       highlight-current-row
     >
-      <el-table-column align="center" label="序号" width="95">
+      <el-table-column align="center" label="序号" width="50">
         <template slot-scope="scope">{{ scope.$index+1 }}</template>
       </el-table-column>
-      <el-table-column align="center" label="解决方案名称" width="200">
+      <el-table-column align="center" label="解决方案名称" width="150">
         <template slot-scope="scope">
           <el-input v-show="scope.row.edit" v-model="scope.row.name" size="small" />
           <span v-show="!scope.row.edit">{{ scope.row.name }}</span></template>
@@ -22,12 +22,12 @@
           <span>{{ scope.row.intros }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="创建人" width="200" align="center">
+      <el-table-column label="创建人" width="100" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.user.name }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="所属公司" width="200" align="center">
+      <el-table-column label="所属公司" width="150" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.user.company.name }}</span>
         </template>
@@ -35,7 +35,7 @@
       <el-table-column label="公司地址" align="center">
         <template slot-scope="scope">{{ scope.row.user.company.address }}</template>
       </el-table-column>
-      <el-table-column align="center" prop="created_at" label="详细信息" width="200">
+      <el-table-column align="center" prop="created_at" label="详细信息" width="100">
         <template slot-scope="scope">
           <el-button
             v-show="!scope.row.edit"

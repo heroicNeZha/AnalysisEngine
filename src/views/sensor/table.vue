@@ -9,16 +9,18 @@
       fit
       highlight-current-row
     >
-      <el-table-column align="center" label="序号" width="95">
+      <el-table-column align="center" label="序号" width="50">
         <template slot-scope="scope">{{ scope.$index+1 }}</template>
       </el-table-column>
-      <el-table-column label="传感器名称" width="200">
-
+      <el-table-column label="传感器名称" width="150" align="center">
         <template slot-scope="scope">
           <el-input v-show="scope.row.edit" v-model="scope.row.name" size="small" />
           <span v-show="!scope.row.edit">{{ scope.row.name }}</span></template>
       </el-table-column>
-      <el-table-column label="所属公司" width="200" align="center">
+      <el-table-column label="传感器介绍" align="center">
+        <template slot-scope="scope">{{ scope.row.description }}</template>
+      </el-table-column>
+      <el-table-column label="所属公司" width="150" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.company.name }}</span>
         </template>
@@ -26,10 +28,10 @@
       <el-table-column label="公司地址" align="center">
         <template slot-scope="scope">{{ scope.row.company.address }}</template>
       </el-table-column>
-      <el-table-column class-name="status-col" label="公司行业" width="200" align="center">
+      <el-table-column class-name="status-col" label="公司行业" width="100" align="center">
         <template slot-scope="scope">{{ scope.row.company.industry }}</template>
       </el-table-column>
-      <el-table-column align="center" prop="created_at" label="属性" width="200">
+      <el-table-column align="center" prop="created_at" label="属性" width="110">
         <template slot-scope="scope">
           <el-button
             v-show="!scope.row.edit"
@@ -40,7 +42,7 @@
           >编辑</el-button>
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="created_at" label="编辑" width="200">
+      <el-table-column align="center" prop="created_at" label="编辑" width="110">
         <template slot-scope="scope">
           <el-button
             v-show="!scope.row.edit"
