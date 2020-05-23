@@ -29,7 +29,7 @@ export default [
     url: '/sensor/list',
     type: 'get',
     response: config => {
-      const items = List.items
+      const items = List
       return {
         code: 200,
         data: {
