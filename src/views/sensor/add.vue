@@ -9,8 +9,7 @@
       </el-form-item>
       <el-form-item label="所属公司">
         <el-select v-model="form.companyId" placeholder="请选择所属公司">
-          <el-option label="A公司" value="1" />
-          <el-option label="B公司" value="2" />
+          <el-option v-for="company in companys" :key="company.id" :label="company.name" :value="company.id" />
         </el-select>
       </el-form-item>
       <el-form-item label="创建类型">
@@ -28,6 +27,7 @@
 </template>
 
 <script>
+import { getCompanyList } from '@/api/company'
 export default {
   data() {
     return {
@@ -35,10 +35,19 @@ export default {
         name: '',
         describtion: '',
         type: '1'
-      }
+      },
+      companys: null
     }
   },
+  created() {
+    this.fetchData()
+  },
   methods: {
+    fetchData() {
+      getCompanyList().then(response => {
+        this.companys = response.data.items
+      })
+    },
     onSubmit() {
       this.$refs.form.validate(valid => {
         if (valid) {

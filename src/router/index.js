@@ -52,6 +52,12 @@ export const constantRoutes = [
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
       meta: { title: '仪表盘', icon: 'dashboard' }
+    },
+    {
+      path: 'test',
+      name: 'test',
+      component: () => import('@/views/dashboard/test'),
+      meta: { title: '测试', icon: 'dashboard' }
     }]
   },
 
@@ -59,7 +65,7 @@ export const constantRoutes = [
     path: '/gateway',
     component: Layout,
     redirect: '/gateway/add',
-    name: '网关中心',
+    name: 'gateway',
     meta: {
       title: '网关中心',
       icon: 'tree'
@@ -68,7 +74,7 @@ export const constantRoutes = [
       {
         path: 'add',
         component: () => import('@/views/gateway/add'), // Parent router-view
-        name: 'add',
+        name: 'gateway-add',
         meta: { title: '添加网关' }
       },
       {
@@ -92,11 +98,12 @@ export const constantRoutes = [
       {
         path: 'add',
         component: () => import('@/views/sensor/add'), // Parent router-view
-        name: 'add',
+        name: 'sensor-add',
         meta: { title: '添加传感器' }
       },
       {
         path: 'manage',
+        name: 'sensor-manage',
         component: () => import('@/views/sensor/table'),
         meta: { title: '传感器管理' }
       }
@@ -116,16 +123,16 @@ export const constantRoutes = [
       {
         path: 'add',
         component: () => import('@/views/solution/add'), // Parent router-view
-        name: 'add',
+        name: 'solution-add',
         meta: { title: '创建解决方案' }
       },
       {
-        path: 'manage',
+        path: 'solution-manage',
         component: () => import('@/views/solution/stable'),
         meta: { title: '解决方案管理' }
       },
       {
-        path: 'program',
+        path: 'program-manage',
         component: () => import('@/views/solution/ptable'),
         meta: { title: '项目管理' }
       }

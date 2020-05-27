@@ -6,13 +6,15 @@ import table from './table'
 import gateway from './gateway'
 import sensor from './sensor'
 import solution from './solution'
+import company from './company'
 
 const mocks = [
   ...table,
   ...gateway,
   ...sensor,
   ...solution,
-  ...user
+  ...user,
+  ...company
 ]
 
 // for front mock
