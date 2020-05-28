@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import { getList } from '@/api/sensor'
+import { getSensorList } from '@/api/sensor'
 
 export default {
   filters: {
@@ -89,7 +89,7 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      getList().then(response => {
+      getSensorList().then(response => {
         this.list = response.data.items
         this.listLoading = false
       })

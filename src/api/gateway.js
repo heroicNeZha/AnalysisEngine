@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-export function getList(params) {
+export function getGatewayList(params) {
   return request({
     url: '/gateway/list',
     method: 'get',
@@ -8,7 +8,7 @@ export function getList(params) {
   })
 }
 
-export function add(data) {
+export function addGateway(data) {
   return request({
     url: '/gateway/add',
     method: 'post',

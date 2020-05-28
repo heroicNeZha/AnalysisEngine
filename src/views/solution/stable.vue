@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { getSolutions } from '@/api/solution'
+import { getSolutionList } from '@/api/solution'
 
 export default {
   filters: {
@@ -76,7 +76,7 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      getSolutions().then(response => {
+      getSolutionList().then(response => {
         this.list = response.data.items
         this.listLoading = false
       })

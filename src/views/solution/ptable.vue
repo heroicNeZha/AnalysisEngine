@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { getPrograms } from '@/api/solution'
+import { getProgramList } from '@/api/solution'
 
 export default {
   filters: {
@@ -80,7 +80,7 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      getPrograms().then(response => {
+      getProgramList().then(response => {
         this.list = response.data.items
         this.listLoading = false
       })

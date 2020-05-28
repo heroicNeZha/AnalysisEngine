@@ -1,13 +1,13 @@
 import request from '@/utils/request'
 
-export function getList(params) {
+export function getSensorList(params) {
   return request({
     url: '/sensor/list',
     method: 'get',
     params
   })
 }
-export function add(data) {
+export function addSensor(data) {
   return request({
     url: '/sensor/add',
     method: 'post',

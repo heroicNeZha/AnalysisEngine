@@ -1,3 +1,4 @@
+import Mock from 'mockjs'
 
 const tokens = {
   admin: {
@@ -8,22 +9,43 @@ const tokens = {
   }
 }
 
-const users = {
-  'admin': {
-    roles: ['admin'],
-    introduction: 'I am a super administrator',
-    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-    name: 'Super Admin'
-  },
-  'editor': {
-    roles: ['editor'],
-    introduction: 'I am an editor',
-    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-    name: 'Normal Editor'
-  }
+const List = []
+const count = 30
+
+for (let i = 0; i < count; i++) {
+  List.push(Mock.mock({
+    user: {
+      id: '@id',
+      name: '@cname()',
+      phone: /^1[3456789]\d{9}$/,
+      roles: ['admin'],
+      avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+      company: {
+        id: '@id',
+        name: '@ctitle',
+        address: '@county(true)',
+        industry: '@csentence(2,4)',
+        intros: '@csentence'
+      }
+    }
+  }))
 }
 
 export default [
+  {
+    url: '/user/list',
+    type: 'post',
+    response: config => {
+      const items = List
+      return {
+        code: 200,
+        data: {
+          total: items.length,
+          items: items
+        }
+      }
+    }
+  },
   // user login
   {
     url: '/user/login',
@@ -53,7 +75,8 @@ export default [
     type: 'get',
     response: config => {
       const { token } = config.query
-      const info = users[token]
+      console.log(token)
+      const info = List[0]
 
       // mock error
       if (!info) {

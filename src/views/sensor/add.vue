@@ -34,7 +34,8 @@ export default {
       form: {
         name: '',
         describtion: '',
-        type: '1'
+        type: '1',
+        companyId: ''
       },
       companys: null
     }

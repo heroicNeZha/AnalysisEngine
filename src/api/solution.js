@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-export function getSolutions(params) {
+export function getSolutionList(params) {
   return request({
     url: '/solution/solutions',
     method: 'get',
@@ -8,7 +8,7 @@ export function getSolutions(params) {
   })
 }
 
-export function getPrograms(params) {
+export function getProgramList(params) {
   return request({
     url: '/solution/programs',
     method: 'get',
