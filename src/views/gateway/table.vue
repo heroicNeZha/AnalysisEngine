@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import { getList } from '@/api/gateway'
+import { getGatewayList } from '@/api/gateway'
 
 export default {
   filters: {
@@ -91,7 +91,7 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      getList().then(response => {
+      getGatewayList().then(response => {
         this.list = response.data.items
         this.listLoading = false
       })

@@ -15,3 +15,11 @@ export function getProgramList(params) {
     params
   })
 }
+
+export function addSolution(params) {
+  return request({
+    url: '/solution/solutions',
+    method: 'post',
+    params
+  })
+}

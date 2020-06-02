@@ -5,7 +5,7 @@
         <el-input v-model="form.name" />
       </el-form-item>
       <el-form-item label="类型">
-        <el-tag :type="form.public | statusFilter">{{ form.public===0?"私有":form.public===1?"公开":"解决方案" }}</el-tag>
+        <el-tag :type="form.public_ | statusFilter">{{ form.public_===0?"私有":form.public_===1?"公开":"解决方案" }}</el-tag>
       </el-form-item>
       <el-form-item label="详细介绍">
         <el-input v-model="form.intros" type="textarea" />
@@ -16,14 +16,18 @@
         </el-select>
       </el-form-item>
       <el-form-item label="网关">
-        <el-checkbox-group v-model="form.gateway">
-          <el-checkbox v-for="gateway in gateways" :key="gateway.id" :label="gateway.name" name="gateway" />
-        </el-checkbox-group>
+        <div class="border-box">
+          <el-checkbox-group v-model="form.gateway">
+            <el-checkbox v-for="gateway in gateways" :key="gateway.id" :label="gateway.id">{{ gateway.name }}</el-checkbox>
+          </el-checkbox-group>
+        </div>
       </el-form-item>
       <el-form-item label="传感器">
-        <el-checkbox-group v-model="form.sensor">
-          <el-checkbox v-for="sensor in sensors" :key="sensor.id" :label="sensor.name" name="sensor" />
-        </el-checkbox-group>
+        <div class="border-box">
+          <el-checkbox-group v-model="form.sensor">
+            <el-checkbox v-for="sensor in sensors" :key="sensor.id" :label="sensor.id">{{ sensor.name }}</el-checkbox>
+          </el-checkbox-group>
+        </div>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">创建</el-button>
@@ -52,11 +56,11 @@ export default {
     return {
       form: {
         name: '',
-        public: '2',
+        public_: '2',
         intros: '',
-        user: '',
-        gateway: '',
-        sensor: ''
+        userId: '',
+        gateway: [],
+        sensor: []
       },
       sensors: null,
       gateways: null,
@@ -107,4 +111,11 @@ export default {
   text-align: center;
 }
 </style>
-
+<style scoped>
+.border-box {
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04); */
+  margin-top: 5px;
+  padding-left: 15px;
+}
+</style>

@@ -1,4 +1,4 @@
-import { addSensor } from '@/api/sensor'
+import { addSensor } from '@/api/solution'
 
 const actions = {
   // sensor add

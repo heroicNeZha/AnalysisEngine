@@ -70,6 +70,17 @@ export default [
         }
       }
     }
+  },
+  {
+    url: '/solution/solutions',
+    type: 'post',
+    response: config => {
+      console.log(config.query)
+      return {
+        code: 200,
+        msg: '插入成功'
+      }
+    }
   }
 ]
 
