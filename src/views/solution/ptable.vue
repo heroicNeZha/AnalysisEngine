@@ -15,7 +15,8 @@
       <el-table-column align="center" label="项目名称" width="150">
         <template slot-scope="scope">
           <el-input v-show="scope.row.edit" v-model="scope.row.name" size="small" />
-          <span v-show="!scope.row.edit">{{ scope.row.name }}</span></template>
+          <span v-show="!scope.row.edit">{{ scope.row.name }}</span>
+        </template>
       </el-table-column>
       <el-table-column label="项目介绍">
         <template slot-scope="scope">

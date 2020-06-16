@@ -17,6 +17,7 @@ export function getProgramList(params) {
 }
 
 export function addSolution(params) {
+  console.log(params)
   return request({
     url: '/solution/solutions',
     method: 'post',
