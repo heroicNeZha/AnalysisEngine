@@ -66,6 +66,7 @@
     <div>
       <el-dialog title="传感器详细信息" :visible.sync="dialogFormVisible">
         <el-form :model="detailForm">
+          <el-input v-model="detailForm.id" type="hidden" size="small" autocomplete="off" />
           <el-form-item label="传感器名称" :label-width="formLabelWidth">
             <el-input v-model="detailForm.name" size="small" autocomplete="off" />
           </el-form-item>
@@ -86,7 +87,7 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogFormVisible = false">取 消</el-button>
-          <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+          <el-button type="primary" @click="updateForm()">确 定</el-button>
         </div>
       </el-dialog>
     </div>
@@ -94,7 +95,7 @@
 </template>
 
 <script>
-import { getSensorList } from '@/api/sensor'
+import { getSensorList, updateSensor } from '@/api/sensor'
 import { getCompanyList } from '@/api/company'
 
 export default {
@@ -112,7 +113,8 @@ export default {
     return {
       list: null,
       listLoading: true,
-      dialogFormVisible: false,
+      companys: null,
+      // detail dialog
       detailForm: {
         id: '',
         name: '',
@@ -126,7 +128,7 @@ export default {
           intros: ''
         }
       },
-      companys: null,
+      dialogFormVisible: false,
       formLabelWidth: '120px'
     }
   },
@@ -144,6 +146,7 @@ export default {
         this.listLoading = false
       })
     },
+    // detail Dialog
     showDetail(id) {
       this.list.forEach(element => {
         if (element.id === id) {
@@ -159,6 +162,14 @@ export default {
     updateData(event, row) {
       row.edit = false
       this.$set(this.list, row.$index, row)
+    },
+    updateForm() {
+      this.dialogFormVisible = false
+      updateSensor(this.detailForm).then(response => {
+        this.$message(response.message)
+      }).catch(() => {
+        this.$message('修改失败')
+      })
     }
   }
 }

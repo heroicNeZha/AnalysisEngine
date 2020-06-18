@@ -38,8 +38,8 @@
             type="primary"
             size="small"
             icon="edit"
-            @click="alert(1)"
-          >编辑</el-button>
+            @click="showDetail(scope.row.id)"
+          >查看属性</el-button>
         </template>
       </el-table-column>
       <el-table-column align="center" prop="created_at" label="编辑" width="110">
@@ -61,11 +61,38 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-dialog title="传感器详细信息" :visible.sync="dialogFormVisible">
+      <el-form :model="detailForm">
+        <el-input v-model="detailForm.id" type="hidden" size="small" autocomplete="off" />
+        <el-form-item label="传感器名称" :label-width="formLabelWidth">
+          <el-input v-model="detailForm.name" size="small" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="传感器介绍" :label-width="formLabelWidth">
+          <el-input v-model="detailForm.description" size="small" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="所属公司" :label-width="formLabelWidth">
+          <el-select v-model="detailForm.company.id" placeholder="请选择公司">
+            <el-option v-for="company in companys" :key="company.id" :label="company.name" :value="company.id" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="公司地址" :label-width="formLabelWidth">
+          <el-input v-model="detailForm.company.address" size="small" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="公司行业" :label-width="formLabelWidth">
+          <el-input v-model="detailForm.company.industry" size="small" autocomplete="off" />
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="updateForm()">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { getGatewayList } from '@/api/gateway'
+import { getGatewayList, updateGateway } from '@/api/gateway'
+import { getCompanyList } from '@/api/company'
 
 export default {
   filters: {
@@ -82,7 +109,24 @@ export default {
     return {
       tableKey: 0,
       list: null,
-      listLoading: true
+      listLoading: true,
+      companys: null,
+      // detail dialog
+      detailForm: {
+        id: '',
+        name: '',
+        description: '',
+        type: '1',
+        company: {
+          id: '',
+          name: '',
+          address: '',
+          industry: '',
+          intros: ''
+        }
+      },
+      dialogFormVisible: false,
+      formLabelWidth: '120px'
     }
   },
   created() {
@@ -94,6 +138,35 @@ export default {
       getGatewayList().then(response => {
         this.list = response.data.items
         this.listLoading = false
+      })
+      getCompanyList().then(response => {
+        this.companys = response.data.items
+        this.listLoading = false
+      })
+    },
+    // detail Dialog
+    showDetail(id) {
+      this.list.forEach(element => {
+        if (element.id === id) {
+          this.detailForm = element
+        }
+      })
+      this.dialogFormVisible = true
+    },
+    editData(event, row) {
+      row.edit = true
+      this.$set(this.list, row.$index, row)
+    },
+    updateData(event, row) {
+      row.edit = false
+      this.$set(this.list, row.$index, row)
+    },
+    updateForm() {
+      this.dialogFormVisible = false
+      updateGateway(this.detailForm).then(response => {
+        this.$message(response.message)
+      }).catch(() => {
+        this.$message('修改失败')
       })
     }
   }

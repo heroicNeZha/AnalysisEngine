@@ -47,6 +47,7 @@ export const constantRoutes = [
     path: '/',
     component: Layout,
     redirect: '/dashboard',
+    meta: { title: '仪表盘', icon: 'dashboard' },
     children: [{
       path: 'dashboard',
       name: 'Dashboard',
@@ -147,11 +148,11 @@ export const constantRoutes = [
     children: [{
       path: 'user',
       name: 'user',
-      component: () => import('@/views/user/index'),
+      component: () => import('@/views/user/users'),
       meta: { title: '用户管理' }
     }, {
       path: 'company',
-      component: () => import('@/views/solution/stable'),
+      component: () => import('@/views/user/company'),
       meta: { title: '公司管理' }
     }]
   },

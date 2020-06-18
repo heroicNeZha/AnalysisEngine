@@ -55,6 +55,19 @@ export default [
         data: null
       }
     }
+  },
+  {
+    url: '/sensors/',
+    type: 'put',
+    response: config => {
+      console.log(config.body)
+
+      return {
+        code: 200,
+        message: '修改成功',
+        data: null
+      }
+    }
   }
 ]
 

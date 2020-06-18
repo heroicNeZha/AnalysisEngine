@@ -16,3 +16,10 @@ export function addGateway(data) {
   })
 }
 
+export function updateGateway(data) {
+  return request({
+    url: '/gateways/',
+    method: 'put',
+    data
+  })
+}
