@@ -1,11 +1,34 @@
 <template>
-  <div class="app-container">
-    <el-form ref="form" :model="form" label-width="120px">
+  <div class="app-container" style="width:50%">
+    <el-form ref="form" :model="form" label-width="160px">
       <el-form-item label="网关名称">
-        <el-input v-model="form.name" />
+        <el-input v-model="form.model" size="small" autocomplete="off" />
       </el-form-item>
-      <el-form-item label="介绍">
-        <el-input v-model="form.description" type="textarea" rows="5" />
+      <el-form-item label="物联网设备间协议">
+        <el-input v-model="form.innerProtocols " size="small" autocomplete="off" />
+      </el-form-item>
+      <el-form-item label="上传协议">
+        <el-input v-model="form.uploadProtocals " size="small" autocomplete="off" />
+      </el-form-item>
+      <el-form-item label="可充电电池">
+        <el-input v-model="form.chargeable" size="small" autocomplete="off" />
+      </el-form-item>
+      <el-form-item label="输入电压">
+        <el-row>
+          <el-col :span="10"><el-input v-model="form.lowVoltage" size="small" autocomplete="off" /></el-col>
+          <el-col :span="4" style="text-align:center"> ~ </el-col>
+          <el-col :span="10"><el-input v-model="form.highVoltage" size="small" autocomplete="off" /></el-col>
+        </el-row>
+      </el-form-item>
+      <el-form-item label="工作环境">
+        <el-row>
+          <el-col :span="10"><el-input v-model="form.lowTemprature" size="small" autocomplete="off" /></el-col>
+          <el-col :span="4" style="text-align:center"> ~ </el-col>
+          <el-col :span="10"><el-input v-model="form.highTemprature" size="small" autocomplete="off" /></el-col>
+        </el-row>
+      </el-form-item>
+      <el-form-item label="网关介绍">
+        <el-input v-model="form.desc" size="small" autocomplete="off" :autosize="{ minRows: 2, maxRows: 4}" />
       </el-form-item>
       <el-form-item label="所属公司">
         <el-select v-model="form.companyId" placeholder="请选择所属公司">
@@ -28,12 +51,23 @@
 
 <script>
 import { getCompanyList } from '@/api/company'
+import { addGateway } from '@/api/gateway'
 export default {
   data() {
     return {
       form: {
-        name: '',
-        describtion: '',
+        model: '',
+        innerProtocols: '',
+        uploadProtocals: '',
+        chargeable: '',
+        lowVoltage: '',
+        highVoltage: '',
+        lowTemprature: '',
+        highTemprature: '',
+        desc: '',
+        otherDesc: '',
+        industrialGrad: '',
+        companyId: '',
         type: '0'
       },
       companys: null
@@ -51,7 +85,7 @@ export default {
     onSubmit() {
       this.$refs.form.validate(valid => {
         if (valid) {
-          this.$store.dispatch('gateway/add', this.form).then(() => {
+          addGateway(this.form).then(() => {
             this.$message('添加成功')
           }).catch(() => {
             this.$message('添加失败')
@@ -77,4 +111,3 @@ export default {
   text-align: center;
 }
 </style>
-

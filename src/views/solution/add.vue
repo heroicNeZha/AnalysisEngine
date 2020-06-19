@@ -18,14 +18,14 @@
       <el-form-item label="网关">
         <div class="border-box">
           <el-checkbox-group v-model="form.gateway">
-            <el-checkbox v-for="gateway in gateways" :key="gateway.id" :label="gateway.id">{{ gateway.name }}</el-checkbox>
+            <el-checkbox v-for="gateway in gateways" :key="gateway.id" :label="gateway.id">{{ gateway.model }}</el-checkbox>
           </el-checkbox-group>
         </div>
       </el-form-item>
       <el-form-item label="传感器">
         <div class="border-box">
           <el-checkbox-group v-model="form.sensor">
-            <el-checkbox v-for="sensor in sensors" :key="sensor.id" :label="sensor.id">{{ sensor.name }}</el-checkbox>
+            <el-checkbox v-for="sensor in sensors" :key="sensor.id" :label="sensor.id">{{ sensor.model }}</el-checkbox>
           </el-checkbox-group>
         </div>
       </el-form-item>

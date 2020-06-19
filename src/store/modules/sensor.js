@@ -3,9 +3,9 @@ import { addSensor } from '@/api/solution'
 const actions = {
   // sensor add
   add({ commit }, gatewayForm) {
-    const { name, description, type, companyId } = gatewayForm
+    const { model, innerProtocols, uploadProtocals, chargeable, lowVoltage, highVoltage, lowTemprature, highTemprature, desc, otherDesc, industrialGrad, companyId } = gatewayForm
     return new Promise((resolve, reject) => {
-      addSensor({ name: name.trim(), description: description, type: type, companyId: companyId }).then(response => {
+      addSensor({ model: model, innerProtocols: innerProtocols, uploadProtocals: uploadProtocals, chargeable, lowVoltage, highVoltage, lowTemprature, highTemprature, desc, otherDesc, industrialGrad, companyId }).then(response => {
         console.log(response)
 
         resolve()

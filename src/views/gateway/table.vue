@@ -14,22 +14,31 @@
       </el-table-column>
       <el-table-column label="网关名称" width="150" align="center">
         <template slot-scope="scope">
-          <el-input v-show="scope.row.edit" v-model="scope.row.name" size="small" />
-          <span v-show="!scope.row.edit">{{ scope.row.name }}</span></template>
+          <el-input v-show="scope.row.edit" v-model="scope.row.model" size="small" />
+          <span v-show="!scope.row.edit">{{ scope.row.model }}</span></template>
       </el-table-column>
-      <el-table-column label="网关介绍" align="center">
-        <template slot-scope="scope">{{ scope.row.description }}</template>
+      <el-table-column label="物联网设备间协议" align="center">
+        <template slot-scope="scope">{{ scope.row.innerProtocols }}</template>
+      </el-table-column>
+      <el-table-column label="上传协议" align="center">
+        <template slot-scope="scope">{{ scope.row.uploadProtocals }}</template>
+      </el-table-column>
+      <el-table-column label="可充电电池" align="center">
+        <template slot-scope="scope">{{ scope.row.chargeable }}</template>
+      </el-table-column>
+      <el-table-column label="输入电压" align="center">
+        <template slot-scope="scope">DC {{ scope.row.lowVoltage }} ～ {{ scope.row.highVoltage }} V</template>
+      </el-table-column>
+      <el-table-column label="工作环境" align="center">
+        <template slot-scope="scope">{{ scope.row.lowTemprature }} ～ {{ scope.row.highTemprature }} &#176;C</template>
+      </el-table-column>
+      <el-table-column label="网关介绍">
+        <template slot-scope="scope">{{ scope.row.desc }}</template>
       </el-table-column>
       <el-table-column label="所属公司" width="150" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.company.name }}</span>
         </template>
-      </el-table-column>
-      <el-table-column label="公司地址" align="center">
-        <template slot-scope="scope">{{ scope.row.company.address }}</template>
-      </el-table-column>
-      <el-table-column class-name="status-col" label="公司行业" width="100" align="center">
-        <template slot-scope="scope">{{ scope.row.company.industry }}</template>
       </el-table-column>
       <el-table-column align="center" prop="created_at" label="属性" width="110">
         <template slot-scope="scope">
@@ -61,25 +70,45 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-dialog title="传感器详细信息" :visible.sync="dialogFormVisible">
+    <el-dialog title="网关详细信息" :visible.sync="dialogFormVisible">
       <el-form :model="detailForm">
         <el-input v-model="detailForm.id" type="hidden" size="small" autocomplete="off" />
-        <el-form-item label="传感器名称" :label-width="formLabelWidth">
-          <el-input v-model="detailForm.name" size="small" autocomplete="off" />
+        <el-form-item label="网关名称" :label-width="formLabelWidth">
+          <el-input v-model="detailForm.model" size="small" autocomplete="off" />
         </el-form-item>
-        <el-form-item label="传感器介绍" :label-width="formLabelWidth">
-          <el-input v-model="detailForm.description" size="small" autocomplete="off" />
+        <el-form-item label="网关介绍" :label-width="formLabelWidth">
+          <el-input v-model="detailForm.desc" size="small" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="物联网设备间协议" :label-width="formLabelWidth">
+          <el-input v-model="detailForm.innerProtocols " size="small" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="上传协议" :label-width="formLabelWidth">
+          <el-input v-model="detailForm.uploadProtocals " size="small" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="可充电电池" :label-width="formLabelWidth">
+          <el-input v-model="detailForm.chargeable" size="small" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="输入电压" :label-width="formLabelWidth">
+          <el-row>
+            <el-col :span="10"><el-input v-model="detailForm.lowVoltage" size="small" autocomplete="off" /></el-col>
+            <el-col :span="4" style="text-align:center"> ~ </el-col>
+            <el-col :span="10"><el-input v-model="detailForm.highVoltage" size="small" autocomplete="off" /></el-col>
+          </el-row>
+        </el-form-item>
+        <el-form-item label="工作环境" :label-width="formLabelWidth">
+          <el-row>
+            <el-col :span="10"><el-input v-model="detailForm.lowTemprature" size="small" autocomplete="off" /></el-col>
+            <el-col :span="4" style="text-align:center"> ~ </el-col>
+            <el-col :span="10"><el-input v-model="detailForm.highTemprature" size="small" autocomplete="off" /></el-col>
+          </el-row>
+        </el-form-item>
+        <el-form-item label="网关介绍" :label-width="formLabelWidth">
+          <el-input v-model="detailForm.desc " size="small" autocomplete="off" :autosize="{ minRows: 2, maxRows: 4}" />
         </el-form-item>
         <el-form-item label="所属公司" :label-width="formLabelWidth">
           <el-select v-model="detailForm.company.id" placeholder="请选择公司">
             <el-option v-for="company in companys" :key="company.id" :label="company.name" :value="company.id" />
           </el-select>
-        </el-form-item>
-        <el-form-item label="公司地址" :label-width="formLabelWidth">
-          <el-input v-model="detailForm.company.address" size="small" autocomplete="off" />
-        </el-form-item>
-        <el-form-item label="公司行业" :label-width="formLabelWidth">
-          <el-input v-model="detailForm.company.industry" size="small" autocomplete="off" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -114,9 +143,17 @@ export default {
       // detail dialog
       detailForm: {
         id: '',
-        name: '',
-        description: '',
-        type: '1',
+        model: '',
+        innerProtocols: '',
+        uploadProtocals: '',
+        chargeable: '',
+        lowVoltage: '',
+        highVoltage: '',
+        lowTemprature: '',
+        highTemprature: '',
+        desc: '',
+        otherDesc: '',
+        industrialGrad: '',
         company: {
           id: '',
           name: '',
@@ -126,7 +163,7 @@ export default {
         }
       },
       dialogFormVisible: false,
-      formLabelWidth: '120px'
+      formLabelWidth: '140px'
     }
   },
   created() {

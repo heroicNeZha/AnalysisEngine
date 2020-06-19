@@ -6,20 +6,23 @@ const count = 30
 for (let i = 0; i < count; i++) {
   List.push(Mock.mock({
     id: '@id',
-    name: '@ctitle',
-    description: '@csentence(10,15)',
-    type: '0',
+    model: '@ctitle',
+    'innerProtocols|1': ['test', 'RS-232', 'RS-485'],
+    'uploadProtocals|1': ['TCP', 'UDP', 'HTTP'],
+    'chargeable|0-1': 1,
+    'lowVoltage|1-10': 1,
+    'highVoltage|20-30': 10,
+    'lowTemprature|0-10': 10,
+    'highTemprature|30-60': 30,
+    desc: '@csentence(10,15)',
+    otherDesc: '尺寸：90 x 88 x 56 mm',
+    industrialGrad: '工业级',
     company: {
       id: '@id',
       name: '@ctitle',
       address: '@county(true)',
-      industry: '@ctitle(2,4)',
+      industry: '@csentence(2,4)',
       intros: '@csentence'
-    },
-    properties: {
-      id: '@id',
-      name: '@ctitle',
-      value: '@ctitle(2,4)'
     }
   }
   ))
