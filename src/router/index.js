@@ -5,6 +5,7 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
+import FrontLayout from '@/frontLayout'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -41,6 +42,24 @@ export const constantRoutes = [
     path: '/404',
     component: () => import('@/views/404'),
     hidden: true
+  },
+
+  {
+    path: '/front',
+    component: FrontLayout,
+    hidden: true,
+    redirect: '/front/search',
+    children: [{
+      path: 'search',
+      name: 'Search',
+      component: () => import('@/views/front/search.vue')
+    },
+    {
+      path: 'addProgram',
+      name: 'AddProgram',
+      component: () => import('@/views/front/addProgram.vue')
+    }
+    ]
   },
 
   {

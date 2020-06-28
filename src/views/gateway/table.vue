@@ -24,7 +24,8 @@
         <template slot-scope="scope">{{ scope.row.uploadProtocals }}</template>
       </el-table-column>
       <el-table-column label="可充电电池" align="center">
-        <template slot-scope="scope">{{ scope.row.chargeable }}</template>
+        <template slot-scope="scope">
+          <el-tag :type="scope.row.chargeable | chargeableFilter">{{ scope.row.chargeable==0?" 否 ":" 是 " }}</el-tag></template>
       </el-table-column>
       <el-table-column label="输入电压" align="center">
         <template slot-scope="scope">DC {{ scope.row.lowVoltage }} ～ {{ scope.row.highVoltage }} V</template>
@@ -132,6 +133,13 @@ export default {
         deleted: 'danger'
       }
       return statusMap[status]
+    },
+    chargeableFilter(chargeable) {
+      const statusMap = {
+        1: 'success',
+        0: 'info'
+      }
+      return statusMap[chargeable]
     }
   },
   data() {
