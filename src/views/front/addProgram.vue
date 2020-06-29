@@ -1,11 +1,17 @@
 <template>
   <div class="app-container">
     <el-form ref="form" :model="form" label-width="120px">
-      <el-form-item label="解决方案名称">
+      <el-form-item label="项目名称">
         <el-input v-model="form.name" />
       </el-form-item>
-      <el-form-item label="类型">
-        <el-tag :type="form.public_ | statusFilter">{{ form.public_===0?"私有":form.public_===1?"公开":"解决方案" }}</el-tag>
+      <el-form-item label="公开">
+        <el-switch
+          v-model="form.public "
+          active-color="#13ce66"
+          inactive-color="#ff4949"
+          active-value="1"
+          inactive-value="0"
+        />
       </el-form-item>
       <el-form-item label="详细介绍">
         <el-input v-model="form.intros" type="textarea" />
@@ -69,6 +75,7 @@
 import { getSensorList } from '@/api/sensor'
 import { getGatewayList } from '@/api/gateway'
 import { getUserList } from '@/api/user'
+import { addProgram } from '@/api/solution'
 export default {
   filters: {
     statusFilter(status) {
@@ -84,7 +91,7 @@ export default {
     return {
       form: {
         name: '',
-        public_: '2',
+        public: '2',
         intros: '',
         userId: '',
         gateway: [],
@@ -113,7 +120,7 @@ export default {
     onSubmit() {
       this.$refs.form.validate(valid => {
         if (valid) {
-          this.$store.dispatch('solution/add', this.form).then(() => {
+          addProgram(this.form).then(() => {
             this.$message('添加成功')
           }).catch(() => {
             this.$message('添加失败')

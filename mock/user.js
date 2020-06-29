@@ -21,10 +21,10 @@ for (let i = 0; i < count; i++) {
     avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
     company: {
       id: '@id',
-      name: '@ctitle',
+      name: '@cword(2,3) 有限公司',
       address: '@county(true)',
-      industry: '@csentence(2,4)',
-      intros: '@csentence'
+      industry: '@cword(2,3)',
+      intros: '提供的软件接入、硬件接入、服务接入、AI接入服务，打破传统软硬件捆绑逻辑，支持硬件、软件、服务的模块块组建与自升级。把自身能力灵活、标准化的赋能给应用服务，并联合应用服务商为建筑搭建组合不同类型的解决方案，让服务可以持续升级。 @csentence'
     }
   }))
 }

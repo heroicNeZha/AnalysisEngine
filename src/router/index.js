@@ -48,7 +48,7 @@ export const constantRoutes = [
     path: '/front',
     component: FrontLayout,
     hidden: true,
-    redirect: '/front/search',
+    redirect: '/front/searchProgram',
     children: [{
       path: 'search',
       name: 'Search',
@@ -58,6 +58,14 @@ export const constantRoutes = [
       path: 'addProgram',
       name: 'AddProgram',
       component: () => import('@/views/front/addProgram.vue')
+    }, {
+      path: 'manageProgram',
+      name: 'ManageProgram',
+      component: () => import('@/views/front/manageProgram.vue')
+    }, {
+      path: 'searchProgram',
+      name: 'SearchProgram',
+      component: () => import('@/views/front/searchGateway.vue')
     }
     ]
   },

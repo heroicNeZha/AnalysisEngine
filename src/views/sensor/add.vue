@@ -11,7 +11,13 @@
         <el-input v-model="form.uploadProtocals " size="small" autocomplete="off" />
       </el-form-item>
       <el-form-item label="可充电电池">
-        <el-input v-model="form.chargeable" size="small" autocomplete="off" />
+        <el-switch
+          v-model="form.chargeable"
+          active-color="#13ce66"
+          inactive-color="#ff4949"
+          active-value="1"
+          inactive-value="0"
+        />
       </el-form-item>
       <el-form-item label="输入电压">
         <el-row>

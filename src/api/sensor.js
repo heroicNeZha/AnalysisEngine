@@ -14,6 +14,13 @@ export function addSensor(data) {
     data
   })
 }
+export function searchSensor(data) {
+  return request({
+    url: '/sensor/search',
+    method: 'post',
+    data
+  })
+}
 export function updateSensor(data) {
   return request({
     url: '/sensors/',

@@ -69,17 +69,17 @@ export default {
           icon: 'el-icon-search',
           navGroup: [
             {
-              path: '/scheme/search',
+              path: '/front/searchProgram',
               name: '网关查询',
               icon: 'el-icon-s-opportunity'
             },
             {
-              path: '/scheme/search',
+              path: '/front/searchProgram',
               name: '传感器查询',
               icon: 'el-icon-s-opportunity'
             },
             {
-              path: '/scheme/search',
+              path: '/front/search',
               name: '组网方案查询',
               icon: 'el-icon-s-cooperation'
             }
@@ -95,7 +95,7 @@ export default {
               icon: 'el-icon-plus'
             },
             {
-              path: '/program/manage',
+              path: '/front/manageProgram',
               name: '项目管理',
               icon: 'el-icon-s-tools'
             }

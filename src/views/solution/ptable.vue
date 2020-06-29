@@ -38,7 +38,7 @@
       </el-table-column>
       <el-table-column class-name="types-col" label="类型" width="100" align="center">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.public | typesFilter">{{ scope.row.public==0?"private":"public" }}</el-tag>
+          <el-tag :type="scope.row.public | typesFilter">{{ scope.row.public=='0'?"private":"public" }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column align="center" prop="created_at" label="详细信息" width="100">
@@ -63,8 +63,8 @@ export default {
   filters: {
     typesFilter(type) {
       const typesMap = {
-        1: 'success',
-        0: 'gray'
+        '1': 'success',
+        '0': 'gray'
       }
       return typesMap[type]
     }
