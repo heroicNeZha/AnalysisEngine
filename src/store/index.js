@@ -6,6 +6,7 @@ import settings from './modules/settings'
 import user from './modules/user'
 import gateway from './modules/gateway'
 import solution from './modules/solution'
+import cart from './cart.js'
 
 Vue.use(Vuex)
 
@@ -15,7 +16,8 @@ const store = new Vuex.Store({
     settings,
     user,
     gateway,
-    solution
+    solution,
+    cart
   },
   getters
 })

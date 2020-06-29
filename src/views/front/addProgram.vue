@@ -68,6 +68,52 @@
         <el-button @click="onCancel">取消</el-button>
       </el-form-item>
     </el-form>
+    <div class="cart-button" style="right: 40px; bottom: 60px;">
+      <el-popover
+        placement="top-end"
+        width="800"
+        trigger="click"
+      >
+        <el-table :data="cartList">
+          <el-table-column width="100" property="model" label="组件名" />
+          <el-table-column width="100" property="innerProtocols" label="网间协议" />
+          <el-table-column width="100" property="uploadProtocals" label="上传协议" />
+          <el-table-column width="80" label="充电电池">
+            <template slot-scope="scope">
+              <span>{{ scope.row.chargeable == 0? "否":"是" }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column width="120" label="输入电压">
+            <template slot-scope="scope">
+              <span>DC {{ scope.row.lowVoltage }}V ~ {{ scope.row.highVoltage }}V</span>
+            </template>
+          </el-table-column>
+          <el-table-column width="150" property="company.name" label="所属公司" />
+          <el-table-column align="center" label="操作" width="100">
+            <template slot-scope="scope">
+              <el-button
+                type="primary"
+                size="small"
+                icon="edit"
+                @click="rmCart(scope.row.id)"
+              >删除</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+        <el-button
+          slot="reference"
+          style="{
+        height: 100%;
+        width: 100%;
+        background-color: #f2f5f6;
+        box-shadow: 0 0 6px rgba(0,0,0, .12);
+        text-align: center;
+        line-height: 40px;
+        color: #1989fa;
+      }"
+        >购物车</el-button>
+      </el-popover>
+    </div>
   </div>
 </template>
 
@@ -76,6 +122,7 @@ import { getSensorList } from '@/api/sensor'
 import { getGatewayList } from '@/api/gateway'
 import { getUserList } from '@/api/user'
 import { addProgram } from '@/api/solution'
+import { mapGetters } from 'vuex'
 export default {
   filters: {
     statusFilter(status) {
@@ -101,6 +148,12 @@ export default {
       gateways: null,
       users: null
     }
+  },
+  computed: {
+  // 使用对象展开运算符将 getter 混入 computed 对象中
+    ...mapGetters([
+      'cartList'
+    ])
   },
   created() {
     this.fetchData()
@@ -136,6 +189,11 @@ export default {
         message: 'cancel!',
         type: 'warning'
       })
+    },
+    rmCart(id) {
+      const e = this.cartList.find(element => element.id === id)
+      const index = this.cartList.indexOf(e)
+      this.cartList.splice(index, 1)
     }
   }
 }
@@ -146,12 +204,27 @@ export default {
   text-align: center;
 }
 </style>
-<style scoped>
+<style>
 .border-box {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   /* box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04); */
   margin-top: 5px;
   padding-left: 15px;
   white-space: pre-wrap;
+}
+.cart-button{
+  position: fixed;
+  background-color: #fff;
+  width: 80px;
+  height: 40px;
+  border-radius: 50%;
+  color: #409eff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 0 6px rgba(0,0,0,.12);
+  cursor: pointer;
+  z-index: 5;
 }
 </style>

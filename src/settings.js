@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: '智能分析引擎 - 后台',
+  title: '物联网智能分析引擎',
 
   /**
    * @type {boolean} true | false
