@@ -37,7 +37,7 @@
                 <br>工作环境: {{ gateway.lowTemprature }} ~ {{ gateway.highTemprature }}&#176;C
                 <br>网关介绍: {{ gateway.desc }}
                 <br>所属公司: {{ gateway.company.name }}</div>
-              <el-checkbox :label="gateway.id">{{ gateway.model }}</el-checkbox>
+              <el-checkbox :label="gateway.id" @change="gatewaySelect(gateway)">{{ gateway.model }}</el-checkbox>
             </el-tooltip>
           </el-checkbox-group>
         </div>
@@ -111,7 +111,7 @@
         line-height: 40px;
         color: #1989fa;
       }"
-        >购物车</el-button>
+        >收藏夹</el-button>
       </el-popover>
     </div>
   </div>
@@ -146,7 +146,13 @@ export default {
       },
       sensors: null,
       gateways: null,
-      users: null
+      users: null,
+
+      lowTemprature: 100,
+      highTemprature: -30,
+      lowVoltage: 220,
+      highVoltage: 0
+
     }
   },
   computed: {
@@ -194,6 +200,21 @@ export default {
       const e = this.cartList.find(element => element.id === id)
       const index = this.cartList.indexOf(e)
       this.cartList.splice(index, 1)
+    },
+    gatewaySelect(gateway) {
+      if (gateway.lowTemprature < this.lowTemprature) {
+        this.lowTemprature = gateway.lowTemprature
+      }
+      if (gateway.highTemprature > this.highTemprature) {
+        this.highTemprature = gateway.highTemprature
+      }
+      if (gateway.lowVoltage < this.lowVoltage) {
+        this.lowVoltage = gateway.lowVoltage
+      }
+      if (gateway.highVoltage > this.highVoltage) {
+        this.highVoltage = gateway.highVoltage
+      }
+      this.sensors = this.sensors.filter(e => { return e.lowTemprature >= this.lowTemprature })
     }
   }
 }

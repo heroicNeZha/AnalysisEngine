@@ -6,7 +6,7 @@ const count = 30
 for (let i = 0; i < count; i++) {
   List.push(Mock.mock({
     id: '@id',
-    model: '@cword(2,3) 网关',
+    model: '@word(4,6) 网关',
     'innerProtocols|1': ['RS-351', 'RS-232', 'RS-485'],
     'uploadProtocals|1': ['TCP', 'UDP', 'HTTP'],
     'chargeable|0-1': 1,

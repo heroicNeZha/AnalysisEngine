@@ -58,7 +58,7 @@
                   <br>工作环境: {{ gateway.lowTemprature }} ~ {{ gateway.highTemprature }}&#176;C
                   <br>网关介绍: {{ gateway.desc }}
                   <br>所属公司: {{ gateway.company.name }}</div>
-                <el-checkbox :label="gateway.id">{{ gateway.model }}</el-checkbox>
+                <el-checkbox :label="gateway.id" @select="gatewaySelect(gateway)">{{ gateway.model }}</el-checkbox>
               </el-tooltip>
             </el-checkbox-group>
           </div>
@@ -133,7 +133,7 @@
         line-height: 40px;
         color: #1989fa;
       }"
-        >购物车</el-button>
+        >收藏夹</el-button>
       </el-popover>
     </div>
   </div>
@@ -246,6 +246,7 @@ export default {
       const index = this.cartList.indexOf(e)
       this.cartList.splice(index, 1)
     }
+
   }
 }
 </script>

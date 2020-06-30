@@ -21,7 +21,7 @@
       <el-card v-for="result in results" :key="result.id" class="box-card">
         <div slot="header" class="clearfix">
           <span>{{ result.model }}</span>
-          <el-button style="float: right; padding: 3px 0" type="text" @click="addCart(result)">加入购物车</el-button>
+          <el-button style="float: right; padding: 3px 0" type="text" @click="addCart(result)">收藏</el-button>
         </div>
         <div>
           <p>网间协议: {{ result.innerProtocols }}</p>
@@ -77,7 +77,7 @@
         line-height: 40px;
         color: #1989fa;
       }"
-        >购物车</el-button>
+        >收藏夹</el-button>
       </el-popover>
     </div>
   </div>
